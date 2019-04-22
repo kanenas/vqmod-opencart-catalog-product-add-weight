@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<modification
+		xmlns="https://github.com/vqmod/vqmod"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="https://github.com/vqmod/vqmod https://raw.githubusercontent.com/vqmod/vqmod/master/vqmod.xsd"
+		>
+		<id><![CDATA[[VQMOD] Add WEIGHT in product page]]></id>
+		<version>1.0.0</version>
+		<vqmver>2.6.3</vqmver>
+		<author>kanenas.net (aka Nikolas Branis) - nbran@kanenas.net</author>
+		<file path="catalog/language/greek/product/" name="product.php" error="log">
+			<operation error="skip">
+				<search position="after"><![CDATA[// Text]]></search>
+				<add><![CDATA[$_['text_weight']        = 'Βάρος:';]]></add>
+			</operation>
+		</file>
+		<file path="catalog/language/english/product/" name="product.php" error="log">
+			<operation error="skip">
+				<search position="after"><![CDATA[// Text]]></search>
+				<add><![CDATA[$_['text_weight']        = 'Weight:';]]></add>
+			</operation>
+		</file>
+		<file path="catalog/controller/product/" name="product.php" error="log">
+			<operation error="skip">
+				<search position="after"><![CDATA[$data['text_model'] = $this->language->get('text_model');]]></search>
+				<add><![CDATA[			$data['text_weight'] = $this->language->get('text_weight');]]></add>
+			</operation>
+			<operation error="skip">
+				<search position="after"><![CDATA[$data['model'] = $product_info['model'];]]></search>
+				<add><![CDATA[			$data['weight'] = $product_info['weight'];]]></add>
+			</operation>
+		</file>
+		<file path="catalog/view/theme/*/template/product/" name="product.tpl" error="log">
+			<operation error="skip">
+				<search position="before"><![CDATA[<div class="product-tabs">]]></search>
+				<add><![CDATA[          <div class="knns-weight"><?php echo $text_weight; ?> <span class="knns-weight"><?php echo $weight; ?></span></div>]]></add>
+			</operation>
+		</file>
+	</modification>
